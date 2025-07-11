@@ -4,19 +4,14 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.types.web_app_info import WebAppInfo
-from aiogram.utils.exceptions import TelegramAPIError, NetworkError
+from aiogram.exceptions import TelegramAPIError, AiogramError  # Новый путь для исключений
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Инициализация бота с обработкой ошибок
-try:
-    bot = Bot(token="7375792763:AAHcKU3WQB3gWn7c3zI_iyjX7rx32a5tP6g")
-except Exception as e:
-    logger.error(f"Ошибка инициализации бота: {e}")
-    raise
-
+# Инициализация бота
+bot = Bot(token="7375792763:AAHcKU3WQB3gWn7c3zI_iyjX7rx32a5tP6g")
 dp = Dispatcher()
 
 @dp.message(Command("start"))
@@ -73,13 +68,13 @@ async def choice_handler(message: Message):
 
 async def main():
     try:
-        await dp.start_polling(bot, skip_updates=True)
-    except NetworkError as e:
-        logger.error(f"Network error: {e}")
+        await dp.start_polling(bot)
+    except AiogramError as e:  # Используем AiogramError вместо NetworkError
+        logger.error(f"Ошибка сети: {e}")
         await asyncio.sleep(5)
-        await main()  # Перезапуск при сетевой ошибке
+        await main()  # Перезапуск при ошибке
     except Exception as e:
-        logger.error(f"Critical error: {e}")
+        logger.error(f"Критическая ошибка: {e}")
     finally:
         await bot.session.close()
 
