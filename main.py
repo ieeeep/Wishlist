@@ -1,0 +1,90 @@
+import asyncio
+import logging
+from aiogram import Bot, Dispatcher
+from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.filters import Command
+from aiogram.types.web_app_info import WebAppInfo
+from aiogram.utils.exceptions import TelegramAPIError, NetworkError
+
+# Настройка логирования
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Инициализация бота с обработкой ошибок
+try:
+    bot = Bot(token="7375792763:AAHcKU3WQB3gWn7c3zI_iyjX7rx32a5tP6g")
+except Exception as e:
+    logger.error(f"Ошибка инициализации бота: {e}")
+    raise
+
+dp = Dispatcher()
+
+@dp.message(Command("start"))
+async def start_handler(message: Message):
+    try:
+        markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text='Выбрать подарок из списка'),
+                    KeyboardButton(text='Посмотреть плохие варианты')
+                ]
+            ],
+            resize_keyboard=True
+        )
+        await message.answer(
+            f'Привет, {message.from_user.first_name}! Я попробую помочь с подарком. Что хочешь узнать?',
+            reply_markup=markup
+        )
+    except TelegramAPIError as e:
+        logger.error(f"Ошибка в start_handler: {e}")
+
+@dp.message()
+async def choice_handler(message: Message):
+    try:
+        if message.text == 'Выбрать подарок из списка':
+            inline_markup = InlineKeyboardMarkup(
+                inline_keyboard=[
+                    [
+                        InlineKeyboardButton(
+                            text="Варианты до 50 рублей",
+                            web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/wishlist.html")
+                        ),
+                        InlineKeyboardButton(
+                            text="Варианты от 50 рублей",
+                            callback_data="expensive_gifts"
+                        ),
+                        InlineKeyboardButton(
+                            text="Книги",
+                            callback_data="books"
+                        )
+                    ]
+                ]
+            )
+            await message.answer(
+                "Вот список подарков! Они разбиты по цене на две категории.",
+                reply_markup=inline_markup
+            )
+        elif message.text == 'Посмотреть плохие варианты':
+            await message.answer("Вот пример того, что бы я не хотела получить.")
+        else:
+            await message.answer("Кис, ты чет не то нажала, попробуй ещё раз.")
+    except TelegramAPIError as e:
+        logger.error(f"Ошибка в choice_handler: {e}")
+
+async def main():
+    try:
+        await dp.start_polling(bot, skip_updates=True)
+    except NetworkError as e:
+        logger.error(f"Network error: {e}")
+        await asyncio.sleep(5)
+        await main()  # Перезапуск при сетевой ошибке
+    except Exception as e:
+        logger.error(f"Critical error: {e}")
+    finally:
+        await bot.session.close()
+
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Бот остановлен")
