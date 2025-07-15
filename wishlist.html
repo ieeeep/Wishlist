@@ -28,19 +28,22 @@
         }
 
         .card {
-            border: 3px solid black;
             border-radius: 15px;
-            background-color: wheat;
+            background-color: #FFEBEE;
             padding: 15px;
             flex: 1 1 250px;
             max-width: calc(100% - 30px);
             box-sizing: border-box;
-
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover{
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
         img {
@@ -64,7 +67,7 @@
         </div>
         <div class="card">
             <h1>Шапочка шелковая</h1>
-            <img src = "pics/hat.png">
+            <img src="pics/hat.png">
             <p>Говорят помогает кудри сохранить после ночи. С полотенцем спать ваще неудобно
                 Мне неважно какого она будет цвета, так что все на ваш вкус.<br>
                 <b>Артикул: 429474930</b>

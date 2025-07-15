@@ -50,7 +50,7 @@ async def choice_handler(message: Message):
                 reply_markup=inline_markup
             )
         elif message.text == 'Посмотреть плохие варианты':
-            await message.answer("Вот пример того, что бы я не хотела получить.")
+            await message.answer("Вот пример того, что бы я не хотела получить.", web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/taby.html"))
         else:
             await message.answer("Кис, ты чет не то нажала, попробуй ещё раз.")
     except TelegramAPIError as e:
