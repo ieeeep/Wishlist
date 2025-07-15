@@ -1,10 +1,13 @@
 import asyncio
+from flask import Flask, request
 import logging
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.types.web_app_info import WebAppInfo
 from aiogram.exceptions import TelegramAPIError, AiogramError
+
+app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -50,11 +53,17 @@ async def choice_handler(message: Message):
                 reply_markup=inline_markup
             )
         elif message.text == 'Посмотреть плохие варианты':
-            await message.answer("Вот пример того, что бы я не хотела получить.", web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/taby.html"))
+            await message.answer("Вот пример того, что бы я не хотела получить.")
+            await message.answer(
+            inline_keyboard=[
+                [InlineKeyboardButton(text="Посмотреть антивишлист",
+                                      web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/taby.html"))]
+            ])
         else:
             await message.answer("Кис, ты чет не то нажала, попробуй ещё раз.")
     except TelegramAPIError as e:
         logger.error(f"Ошибка в choice_handler: {e}")
+
 
 async def main():
     try:
