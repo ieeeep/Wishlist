@@ -4,13 +4,11 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.types.web_app_info import WebAppInfo
-from aiogram.exceptions import TelegramAPIError, AiogramError  # Новый путь для исключений
+from aiogram.exceptions import TelegramAPIError, AiogramError
 
-# Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Инициализация бота
 bot = Bot(token="7375792763:AAHcKU3WQB3gWn7c3zI_iyjX7rx32a5tP6g")
 dp = Dispatcher()
 
@@ -39,20 +37,12 @@ async def choice_handler(message: Message):
         if message.text == 'Выбрать подарок из списка':
             inline_markup = InlineKeyboardMarkup(
                 inline_keyboard=[
-                    [
-                        InlineKeyboardButton(
-                            text="Варианты до 50 рублей",
-                            web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/wishlist.html")
-                        ),
-                        InlineKeyboardButton(
-                            text="Варианты от 50 рублей",
-                            callback_data="expensive_gifts"
-                        ),
-                        InlineKeyboardButton(
-                            text="Книги",
-                            callback_data="books"
-                        )
-                    ]
+                    [InlineKeyboardButton(text="Варианты до 50 рублей",
+                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/wishlist.html"))],
+                    [InlineKeyboardButton(text="Варианты от 50 рублей",
+                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/expensiveWish.html"))],
+                    [InlineKeyboardButton(text="Книги",
+                                          callback_data="books")]
                 ]
             )
             await message.answer(
@@ -69,10 +59,10 @@ async def choice_handler(message: Message):
 async def main():
     try:
         await dp.start_polling(bot)
-    except AiogramError as e:  # Используем AiogramError вместо NetworkError
+    except AiogramError as e:
         logger.error(f"Ошибка сети: {e}")
         await asyncio.sleep(5)
-        await main()  # Перезапуск при ошибке
+        await main()
     except Exception as e:
         logger.error(f"Критическая ошибка: {e}")
     finally:
