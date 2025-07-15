@@ -42,7 +42,7 @@ async def choice_handler(message: Message):
                     [InlineKeyboardButton(text="Варианты от 50 рублей",
                                           web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/expensiveWish.html"))],
                     [InlineKeyboardButton(text="Книги",
-                                          callback_data="books")]
+                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/books.html"))]
                 ]
             )
             await message.answer(
