@@ -5,44 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist</title>
     <style>
-        body{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color:#f19cbb;
-    padding: 5px;
-    margin: 0;
-    box-sizing: border-box;
-}
+        body {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f19cbb;
+            padding: 5px;
+            margin: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
 
-.cards{
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 15px;
-    width: 100%;
-    justify-content: center;
-    padding: 10px;
-}
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+            max-width: 100vw;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-.card{
-    border: 3px solid black;
-    border-radius: 15px;
-    background-color: wheat;
-    padding: 15px;
-    flex: 1 1 250px;
-    max-width: 300px;
+        .card {
+            border: 3px solid black;
+            border-radius: 15px;
+            background-color: wheat;
+            padding: 15px;
+            flex: 1 1 250px;
+            max-width: calc(100% - 30px);
+            box-sizing: border-box;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-img{
-    width: 80%;
-}
+        img {
+            width: 80%;
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +55,7 @@ img{
     <div class="cards">
         <div class="card">
             <h1>Шампунь</h1>
-            <img src="shampoo.png">
+            <img src="pics/shampoo.png">
             <p>Хотелось бы, конечно, что-то от этой фирмы, но не обязательно.
                 Подойдет любой бессульфатный шампунь без силиконов.<br>
                 <b>Артикул: 158762559</b>
@@ -59,7 +64,7 @@ img{
         </div>
         <div class="card">
             <h1>Шапочка шелковая</h1>
-            <img src="hat.png">
+            <img src = "pics/hat.png">
             <p>Говорят помогает кудри сохранить после ночи. С полотенцем спать ваще неудобно
                 Мне неважно какого она будет цвета, так что все на ваш вкус.<br>
                 <b>Артикул: 429474930</b>
@@ -68,7 +73,7 @@ img{
         </div>
         <div class="card">
             <h1>Бигуди</h1>
-            <img src="bigudi.png">
+            <img src="pics/bigudi.png">
             <p>Я ваще не шарю. Хочу очень попробовать такой вариант укладки. Мне главно -
                 чтобы были зажимы и разные виды самих бигудей. Тоже хз, тоже ничего не знаю.<br>
                 <b>Артикул: 223827056</b>
@@ -77,16 +82,16 @@ img{
         </div>
         <div class="card">
             <h1>Футболка</h1>
-            <img src="tshort.png">
+            <img src="pics/tshirt.png">
             <p>Хз, почему мне она так зашла, что даже на др прошу. Просто вайб.
-                Чем-то она мне нравится. Размер скорее всего м.<br>
+                Чем-то она мне нравится. Размер скорее всего s.<br>
                 <b>Артикул: 261897622</b>
             </p>
             <h3>39,76 BYN</h3>
         </div>
         <div class="card">
-            <h1>Шампунь</h1>
-            <img src="luni.png">
+            <h1>Стайлер</h1>
+            <img src="pics/luni.png">
             <p>Вообще ориг стоит 70 рублей (в свое время я и за 100 хотела брать). Все,
                 кто пользуется, говорят, что можно и не ориг взять. Поэтому спокойно отнесусь
                 к пали за 30 бунов. Главное, чтобы работала (по возможности)<br>
