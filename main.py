@@ -1,13 +1,10 @@
 import asyncio
-from flask import Flask, request
 import logging
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.types.web_app_info import WebAppInfo
 from aiogram.exceptions import TelegramAPIError, AiogramError
-
-app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
