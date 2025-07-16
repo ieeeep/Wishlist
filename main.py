@@ -42,11 +42,13 @@ async def choice_handler(message: Message):
                     [InlineKeyboardButton(text="Варианты от 50 рублей",
                                           web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/expensiveWish.html"))],
                     [InlineKeyboardButton(text="Книги",
-                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/books.html"))]
+                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/books.html"))],
+                    [InlineKeyboardButton(text="Варианты для Саши",
+                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/sasha.html"))]
                 ]
             )
             await message.answer(
-                "Вот список подарков! Они разбиты по цене на две категории.",
+                "Вот список подарков! Они разбиты по цене на две категории. Кнопка 'Книги' покажет всё, что у меня есть на полке. Если вы решите подарить мне какое-то чтиво, то ознакомьтесь с уже имеющимися.",
                 reply_markup=inline_markup
             )
         elif message.text == 'Посмотреть плохие варианты':
@@ -54,7 +56,7 @@ async def choice_handler(message: Message):
             await message.answer(
             inline_keyboard=[
                 [InlineKeyboardButton(text="Посмотреть антивишлист",
-                                      web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/taby.html"))]
+                                      web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/tabu.html"))]
             ])
         else:
             await message.answer("Кис, ты чет не то нажала, попробуй ещё раз.")
