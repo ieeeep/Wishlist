@@ -45,8 +45,6 @@ async def choice_handler(message: Message):
                                           web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/booksWish.html"))],
                     [InlineKeyboardButton(text="Книги, которые у меня уже есть",
                                           web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/books.html"))],
-                    [InlineKeyboardButton(text="Варианты для Саши",
-                                          web_app=WebAppInfo(url="https://ieeeep.github.io/Wishlist/sasha.html"))]
                 ]
             )
             await message.answer(
